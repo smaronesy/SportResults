@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_navigation"
+    app:startDestination="@+id/nav_home">
+
+    <fragment
+        android:id="@+id/nav_home"
+        android:name="com.example.sportresults.ui.home.HomeFragment"
+        android:label="@string/home"
+        tools:layout="@layout/fragment_home"/>
+
+    <fragment
+        android:id="@+id/nav_results"
+        android:name="com.example.sportresults.ui.results.ResultsFragment"
+        android:label="@string/results"
+        tools:layout="@layout/fragment_results">
+
+        <action
+            android:id="@+id/action_navigateToResultsList"
+            app:destination="@+id/nav_results_list"/>
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/nav_results_list"
+        android:name="com.example.sportresults.ui.results.ResultsListFragment"
+        android:label="@string/latest_results"
+        tools:layout="@layout/fragment_results_list"/>
+
+</navigation>
