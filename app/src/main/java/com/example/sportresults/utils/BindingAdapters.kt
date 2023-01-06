@@ -48,6 +48,9 @@ fun bindConnectionStatus(imageView: ImageView, status: ResultsApiStatus?){
             imageView.visibility = View.VISIBLE
             imageView.setImageResource(R.drawable.ic_no_connection)
         }
-        else -> {}
+        else -> {
+            imageView.visibility = View.INVISIBLE
+            imageView.setImageResource(0)
+        }
     }
 }

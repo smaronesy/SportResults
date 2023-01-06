@@ -22,6 +22,8 @@ class ResultsViewModel(application: Application, private val resultsRepository: 
     val nbaResultsLatest = resultsRepository.nbaResultsLatest
     val tennisResultsLatest = resultsRepository.tennisResultsLatest
     val latestResults = MutableLiveData<MutableSet<String>>(mutableSetOf())
+    val mostRecentDate = MutableLiveData<String>()
+//    val latestResults = MutableLiveData<MutableMap<Long, MutableSet<String>>>()
 
     init {
         viewModelScope.launch {
