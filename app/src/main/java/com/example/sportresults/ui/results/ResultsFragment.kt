@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.navigation.fragment.findNavController
 import com.example.sportresults.databinding.FragmentResultsBinding
-import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ResultsFragment : Fragment() {
 

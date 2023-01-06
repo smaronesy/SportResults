@@ -1,7 +1,6 @@
 package com.example.sportresults
 
 import android.app.Application
-import com.example.sportresults.database.ResultsDao
 import com.example.sportresults.database.ResultsDatabase
 import com.example.sportresults.repository.ResultsRepository
 import com.example.sportresults.ui.results.ResultsViewModel

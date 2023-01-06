@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.sportresults.databinding.FragmentResultsListBinding
+import com.example.sportresults.repository.ResultsApiStatus
 import org.koin.androidx.viewmodel.ext.android.viewModel
 
 class ResultsListFragment : Fragment() {
@@ -21,7 +22,7 @@ class ResultsListFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
+
         resultListBinding = FragmentResultsListBinding.inflate(inflater, container, false)
 
         resultListBinding.listViewModel = resultViewModel
@@ -40,24 +41,36 @@ class ResultsListFragment : Fragment() {
 
         resultListBinding.resultsRecycler.addItemDecoration(dividerItemDecoration)
 
-        var resultList = mutableListOf<String>()
-        resultViewModel.foneLatestResult.observe(viewLifecycleOwner, Observer {
-            val foneLatest = it.winner + " wins " + it.tournament + " by " +
-                    it.seconds + " seconds"
-            resultList.add(foneLatest)
+        var resultList = mutableSetOf<String>()
+        resultViewModel.foneResultsLatest.observe(viewLifecycleOwner, Observer {
+            if(it != null){
+                val foneLatest = it.winner + " wins " + it.tournament + " by " +
+                        it.seconds + " seconds"
+                resultList.add(foneLatest)
+                resultViewModel.latestResults.value = resultList
+            }
         })
 
-        resultViewModel.nbaLatestResult.observe(viewLifecycleOwner, Observer {
-            val nbaLatest = it.mvp + " leads " + it.winner + " to game "+
-                    it.gameNumber + " win in the " + it.tournament
-            resultList.add(nbaLatest)
+        resultViewModel.nbaResultsLatest.observe(viewLifecycleOwner, Observer {
+            if(it != null){
+                val nbaLatest = it.mvp + " leads " + it.winner + " to game "+
+                        it.gameNumber + " win in the " + it.tournament
+                resultList.add(nbaLatest)
+                resultViewModel.latestResults.value = resultList
+            }
         })
 
-        resultViewModel.tennisLatestResult.observe(viewLifecycleOwner, Observer {
-            val tennisLatest = it.tournament + " : " + it.winner + " wins against " + it.looser +
-                    " in " + it.numberOfSets + " sets"
-            resultList.add(tennisLatest)
-            adapter.submitList(resultList)
+        resultViewModel.tennisResultsLatest.observe(viewLifecycleOwner, Observer {
+            if(it != null){
+                val tennisLatest = it.tournament + ": " + it.winner + " wins against " + it.looser +
+                        " in " + it.numberOfSets + " sets"
+                resultList.add(tennisLatest)
+                resultViewModel.latestResults.value = resultList
+            }
+        })
+
+        resultViewModel.latestResults.observe(viewLifecycleOwner, Observer {
+            adapter.submitList(it.toList())
         })
 
         return resultListBinding.root
