@@ -42,19 +42,13 @@ class ResultsListFragment : Fragment() {
 
         resultListBinding.resultsRecycler.addItemDecoration(dividerItemDecoration)
 
-        var resultList = mutableMapOf<Long, MutableSet<String>>()
+        var resultList = mutableMapOf<Long, LinkedHashSet<Pair<Long, String>>>()
 
         resultViewModel.foneResultsLatest.observe(viewLifecycleOwner, Observer {
             if(it != null){
                 val foneLatest = it.winner + " wins " + it.tournament + " by " +
                         it.seconds + " seconds"
-
                 resultsSetHelper(it.publicationDate, resultList, foneLatest)
-
-                // includes only the results from the most recent date
-                val latest = resultList.keys.max()
-                resultViewModel.mostRecentDate.value = convertLongToTime(latest)
-                resultViewModel.latestResults.value = resultList[latest]
             }
         })
 
@@ -62,13 +56,7 @@ class ResultsListFragment : Fragment() {
             if(it != null){
                 val nbaLatest = it.mvp + " leads " + it.winner + " to game "+
                         it.gameNumber + " win in the " + it.tournament
-
                 resultsSetHelper(it.publicationDate, resultList, nbaLatest)
-
-                // includes only the results from the most recent date
-                val latest = resultList.keys.max()
-                resultViewModel.mostRecentDate.value = convertLongToTime(latest)
-                resultViewModel.latestResults.value = resultList[latest]
             }
         })
 
@@ -76,13 +64,7 @@ class ResultsListFragment : Fragment() {
             if(it != null){
                 val tennisLatest = it.tournament + ": " + it.winner + " wins against " + it.looser +
                         " in " + it.numberOfSets + " sets"
-
                 resultsSetHelper(it.publicationDate, resultList, tennisLatest)
-
-                // includes only the results from the most recent date
-                val latest = resultList.keys.max()
-                resultViewModel.mostRecentDate.value = convertLongToTime(latest)
-                resultViewModel.latestResults.value = resultList[latest]
             }
         })
 
@@ -95,14 +77,31 @@ class ResultsListFragment : Fragment() {
 
     private fun resultsSetHelper(
         publicationDate: Long,
-        resultList: MutableMap<Long, MutableSet<String>>,
+        resultList: MutableMap<Long, LinkedHashSet<Pair<Long, String>>>,
         foneLatest: String
     ) {
         val dateOnly = getDateOnly(publicationDate)
         if (resultList.contains(dateOnly)) {
-            resultList[dateOnly]!!.add(foneLatest)
+            resultList[dateOnly]!!.add(Pair(publicationDate, foneLatest))
         } else {
-            resultList[dateOnly] = mutableSetOf(foneLatest)
+            resultList[dateOnly] = linkedSetOf(Pair(publicationDate, foneLatest))
         }
+
+        // includes only the results from the most recent date
+        val latest = resultList.keys.max()
+        resultViewModel.mostRecentDate.value = convertLongToTime(latest)
+
+        // sort results by date
+        val resultsSortedByDate = sortByDate(resultList[latest]!!)
+        resultViewModel.latestResults.value = resultsSortedByDate
+    }
+
+    private fun sortByDate(set: LinkedHashSet<Pair<Long, String>>): LinkedHashSet<String>{
+        val sorted = set.sortedByDescending { it.first }
+        val sortedResult = linkedSetOf<String>()
+        for(r in sorted){
+            sortedResult.add(r.second)
+        }
+        return sortedResult
     }
 }

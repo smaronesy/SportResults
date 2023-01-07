@@ -17,7 +17,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:text="@string/welcome"
-        android:textSize="25dp"
+        android:textSize="@dimen/heading"
         android:textStyle="bold"
         android:textColor="@color/blue_500"
         android:gravity="center"/>

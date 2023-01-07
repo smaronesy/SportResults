@@ -42,7 +42,7 @@
                 android:layout_marginTop="20dp"
                 android:gravity="center"
                 android:textStyle="bold"
-                android:textSize="20dp"
+                android:textSize="@dimen/heading"
                 app:layout_constraintTop_toBottomOf="@+id/sports_image"
                 android:text='@{"Results for " + listViewModel.mostRecentDate}'/>
 
@@ -64,14 +64,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="invisible"
+                app:resultsApiStatus="@{listViewModel.status}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintHorizontal_bias="0.498"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintVertical_bias="0.626"
-                android:theme="@style/ProgressBarStyle"
-                app:resultsApiStatus="@{listViewModel.status}" />
+                android:theme="@style/ProgressBarStyle"/>
 
             <ImageView
                 android:id="@+id/no_internet"
