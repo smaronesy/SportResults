@@ -14,21 +14,21 @@
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
 
         <View
-            android:background="#C9EBEF"
+            android:background="@color/light_blue"
             android:layout_width="match_parent"
-            android:layout_height="1dp" />
+            android:layout_height="@dimen/one_dp" />
 
         <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:background="#03599E"
+            android:background="@color/blue_500"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <View
-            android:background="#C9EBEF"
+            android:background="@color/light_blue"
             android:layout_width="match_parent"
-            android:layout_height="1dp" />
+            android:layout_height="@dimen/one_dp" />
 
     </com.google.android.material.appbar.AppBarLayout>
 

@@ -8,9 +8,9 @@
     <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:id="@+id/app_icon"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginTop="100dp"
+        android:layout_width="@dimen/onefifty_dp"
+        android:layout_height="@dimen/onefifty_dp"
+        android:layout_marginTop="@dimen/hundred_dp"
         android:layout_gravity="top|center"
         android:src="@drawable/ic_sports_basketball"/>
     <TextView

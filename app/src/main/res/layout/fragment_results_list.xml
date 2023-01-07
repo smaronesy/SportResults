@@ -27,7 +27,7 @@
                 android:id="@+id/sports_image"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="@dimen/sixteen_dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
@@ -39,7 +39,7 @@
                 android:id="@+id/list_title"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
+                android:layout_marginTop="@dimen/twenty_dp"
                 android:gravity="center"
                 android:textStyle="bold"
                 android:textSize="@dimen/heading"
@@ -48,9 +48,9 @@
 
             <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/results_recycler"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
-                android:layout_marginTop="20dp"
+                android:layout_width="@dimen/zero_dp"
+                android:layout_height="@dimen/zero_dp"
+                android:layout_marginTop="@dimen/twenty_dp"
                 app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -75,8 +75,8 @@
 
             <ImageView
                 android:id="@+id/no_internet"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:layout_width="@dimen/hundred_dp"
+                android:layout_height="@dimen/hundred_dp"
                 android:visibility="invisible"
                 app:connectionStatus="@{listViewModel.status}"
                 app:layout_constraintBottom_toBottomOf="@+id/results_recycler"
