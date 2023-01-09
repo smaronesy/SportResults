@@ -35,7 +35,7 @@ class ResultsViewModel(application: Application, private val resultsRepository: 
 
     fun resultsSetHelper(
         publicationDate: Long,
-        resultList: MutableMap<Long, LinkedHashSet<Pair<Long, String>>>,
+        resultList: MutableMap<Long, MutableSet<Pair<Long, String>>>,
         foneLatest: String
     ) {
         val dateOnly = getDateOnly(publicationDate)
@@ -54,7 +54,7 @@ class ResultsViewModel(application: Application, private val resultsRepository: 
         latestResults.value = resultsSortedByDate
     }
 
-    private fun sortByDate(set: LinkedHashSet<Pair<Long, String>>): LinkedHashSet<String>{
+    private fun sortByDate(set: MutableSet<Pair<Long, String>>): MutableSet<String>{
         val sorted = set.sortedByDescending { it.first }
         val sortedResult = linkedSetOf<String>()
         for(r in sorted){

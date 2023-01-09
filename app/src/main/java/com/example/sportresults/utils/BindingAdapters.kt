@@ -42,7 +42,6 @@ fun bindStatus(proBar: ProgressBar, status: ResultsApiStatus?){
 
 @BindingAdapter("connectionStatus")
 fun bindConnectionStatus(imageView: ImageView, status: ResultsApiStatus?){
-    println("STATUS IS: "+ status)
     when(status) {
         ResultsApiStatus.ERROR -> {
             imageView.visibility = View.VISIBLE

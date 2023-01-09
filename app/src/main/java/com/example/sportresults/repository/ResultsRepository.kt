@@ -11,6 +11,7 @@ import kotlinx.coroutines.withContext
 import org.json.JSONObject
 import com.example.sportresults.api.*
 import com.example.sportresults.database.tables.*
+import com.example.sportresults.model.Fone
 
 enum class ResultsApiStatus {LOADING, ERROR, DONE}
 
@@ -49,4 +50,15 @@ class ResultsRepository(private val resultsDao: ResultsDao,
             }
         }
     }
+
+    suspend fun getLatestFoneResult(): Fone? =
+        withContext(ioDispatcher){
+            try {
+                val latestF1 = resultsDao.getLatestFoneResult()
+                val fone = latestF1.value?.toFone()
+                return@withContext fone
+            } catch (e: Exception) {
+                return@withContext null
+            }
+        }
 }

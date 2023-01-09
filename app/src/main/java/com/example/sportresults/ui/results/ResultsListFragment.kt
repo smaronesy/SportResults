@@ -40,7 +40,7 @@ class ResultsListFragment : Fragment() {
 
         resultListBinding.resultsRecycler.addItemDecoration(dividerItemDecoration)
 
-        var resultList = mutableMapOf<Long, LinkedHashSet<Pair<Long, String>>>()
+        var resultList = mutableMapOf<Long, MutableSet<Pair<Long, String>>>()
 
         resultViewModel.foneResultsLatest.observe(viewLifecycleOwner, Observer {
             if(it != null){
